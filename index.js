@@ -71,6 +71,9 @@ function Base1664() {
 	}
 	
 	function dateToBase64(date) {
+		if (typeof date == 'string') {
+			date = new Date(date)
+		}
 		var year   = BASE64_STRING.substr(date.getFullYear() - 2010, 1)
 		var month  = BASE64_STRING.substr(date.getMonth(), 1)
 		var day    = BASE64_STRING.substr(date.getDate(), 1)
