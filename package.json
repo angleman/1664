@@ -1,6 +1,6 @@
 {
   "name": "1664",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Sort safe base16 to/from base64 conversion with filename and url safe characters written in pure javascript",
   "main": "index.js",
   "scripts": {
