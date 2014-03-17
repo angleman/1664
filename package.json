@@ -1,12 +1,13 @@
 {
   "name": "1664",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Sort safe base16 to/from base64 conversion with filename and url safe characters written in pure javascript",
   "main": "index.js",
   "scripts": {
     "test": "mocha -R list test/*.js"
   },
   "dependencies": {
+    "bignum": "^0.6.2"
   },
   "devDependencies": {
     "grunt": "^0.4.3",
