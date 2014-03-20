@@ -1,6 +1,10 @@
-base10 = 'a23094802398' // NaN
-base10 = '2309,4802398 a' // NaN
-base10 = base10.match(/[0-9]*/)[0]
+var BigNumber = require('bignumber.js')
 
+var bn = BigNumber('13953523308134308', 10)
+var b16 = bn.toString(16)
 
-console.log(base10)
+var bn2 = BigNumber(b16, 16)
+
+var b10 = bn2.toString(10)
+
+console.log(b16, b10, 'ok')

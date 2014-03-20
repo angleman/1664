@@ -3,7 +3,7 @@
 
 function Base1664() {
 	var BASE64_STRING = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz~'
-	var bignum        = require('bignum')
+	var BigNumber     = require('bignumber.js')
 	
 	function base16to64(base16) {
 		while (base16.length % 3 != 0 && base16.length > 0) base16 = '0' + base16
@@ -42,12 +42,13 @@ function Base1664() {
 	function base10to16(base10) {
 		if (typeof base10 != 'string') base10 = '' + base10
 		base10 = base10.match(/[0-9]*/)[0]
-		var result = bignum(base10, 10).toString(16)
+		
+		var result = BigNumber(base10, 10).toString(16)
 		return result
 	}
 	
 	function base16to10(base16) {
-		var result = bignum(base16, 16).toString(10)
+		var result = BigNumber(base16, 16).toString(10)
 		return result
 	}
 	
@@ -59,28 +60,40 @@ function Base1664() {
 		return base16to10(base64to16(base64))
 	}
 	
+
+	// returns YYYY-MM-DD hh:mm:ss formated string
 	function base64toDate(base64) {
 		var year   = BASE64_STRING.indexOf(base64[0]) + 2010
-		var month  = BASE64_STRING.indexOf(base64[1])
-		var day    = BASE64_STRING.indexOf(base64[2])
-		var hour   = BASE64_STRING.indexOf(base64[3])
-		var minute = BASE64_STRING.indexOf(base64[4])
-		var second = BASE64_STRING.indexOf(base64[5])
-		var result = new Date(year, month, day, hour, minute, second, 0)
+		var month  = '0' + BASE64_STRING.indexOf(base64[1])
+		var day    = '0' + BASE64_STRING.indexOf(base64[2])
+		var hour   = '0' + BASE64_STRING.indexOf(base64[3])
+		var minute = '0' + BASE64_STRING.indexOf(base64[4])
+		var second = '0' + BASE64_STRING.indexOf(base64[5])
+		var result = year + '-' + month.substr(-2) + '-' + day.substr(-2) + ' ' + hour.substr(-2) + ':' + minute.substr(-2) + ':' + second.substr(-2)
 		return result
 	}
 	
+	
+	// assumes YYYY-MM-DD hh:mm:ss formated string
 	function dateToBase64(date) {
-		if (typeof date == 'string') {
-			date = new Date(date)
-		}
-		var year   = BASE64_STRING.substr(date.getFullYear() - 2010, 1)
-		var month  = BASE64_STRING.substr(date.getMonth(), 1)
-		var day    = BASE64_STRING.substr(date.getDate(), 1)
-		var hour   = BASE64_STRING.substr(date.getHours(), 1)
-		var minute = BASE64_STRING.substr(date.getMinutes(), 1)
-		var second = BASE64_STRING.substr(date.getSeconds(), 1)
-		var result = year + month + day + hour + minute + second
+		var majorminor = date.split(' ')
+		var major      = majorminor[0].split('-')
+		var minor      = majorminor[1].split(':')
+		var year   = parseInt(major[0]) - 2010
+		var month  = parseInt(major[1])
+		var day    = parseInt(major[2])
+		var hour   = parseInt(minor[0])
+		var minute = parseInt(minor[1])
+		var second = parseInt(minor[2])
+
+		year   = BASE64_STRING.substr(year, 1)
+		month  = BASE64_STRING.substr(month, 1)
+		day    = BASE64_STRING.substr(day, 1)
+		hour   = BASE64_STRING.substr(hour, 1)
+		minute = BASE64_STRING.substr(minute, 1)
+		second = BASE64_STRING.substr(second, 1)
+		result = year + month + day + hour + minute + second
+
 		return result
 	}
 	

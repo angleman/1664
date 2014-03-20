@@ -7,7 +7,7 @@
     "test": "mocha -R list test/*.js"
   },
   "dependencies": {
-    "bignum": "^0.6.2"
+    "bignumber.js": "^1.3.0"
   },
   "devDependencies": {
     "grunt": "^0.4.3",
