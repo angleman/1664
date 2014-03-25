@@ -32,6 +32,10 @@ md5b   = base16.from64(md564)
 console.log(md5.length,   md5)    // 32 '5d41402abc4b2a76b9719d911017c592'
 console.log(md564.length, md564)  // 22 '1TGK0fk4hfTgamcP4G5xMI'
 console.log('same?', (md5==md5b)) // same? true
+
+// date string
+console.log(base64.fromDate('2012-10-18 02:57:49')) // 2AI2um
+console.log(base64.toDate('2AI2um'))                // 2012-10-18 02:57:49
 ```
 
 
